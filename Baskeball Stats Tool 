@@ -1,0 +1,58 @@
+import constants.py
+
+if __name__ == "__main__":
+# HINT: Unit 1 project files/workspace had an example of this.
+
+# This does not mean everything you write has to be contained within Dunder Main. 
+# You can still import and define functions outside of dunder main, 
+# you can still extract pieces of logic into those functions. 
+# The main calls to your program should be protected inside Dunder Main, 
+# to prevent automatic execution if your script is imported.
+
+    print('   Basketball Stats Tool')
+    print('\n')
+    print('     -----menu-----')
+    print('\n')
+    print('Your options are:')
+    print('   A) Display Team stats')
+    print('   B) Quit\n')
+    
+    initial_choice = input('Which would you like to do?  ').upper()
+    
+    print('\n')
+    
+    while initial_choice == 'A' or 'y':
+        print('Alright, which team would you like to know more about?')
+        print('  1) Panthers')
+        print('  2) Bandits')
+        print('  3) Warriors')
+        
+        team_choice = input('>  ')
+        
+        if team_choice == '1':
+            print(' - PANTHERS - ')
+            print('--------------')
+            print('Players:')
+            
+            pass
+        
+        elif team_choice == '2':
+            print(' - BANDITS - ')
+            print('--------------')
+            print('Players:')
+            
+            pass
+        
+        elif team_choice == '3':
+            print(' - WARRIORS - ')
+            print('--------------')
+            print('Players:')
+            
+            pass
+        
+        initial_choice = input('Would you like to learn about another team? [y]es or [n]o?  ')
+        
+        if initial_choice == 'B' or 'n':
+            print('Thanks for joining me!')
+            break
+        

@@ -1,6 +1,64 @@
 import constants.py
+import copy
+import random
+
+copied_players = copy.deepcopy(constants.PLAYERS)
+copied_teams = copy.deepcopy(constants.TEAMS)
+
+# incase I need to use the old PLAYERS list
+# if not, make cleaned_players = PLAYERS deepcopy
+cleaned_players = copy.deepcopy(copied_players)
+
+players_guardians_pair = []
+experienced_players = []
+inexperienced_players = []
+
+
+def cleaned_data(cleaned_players):
+    guardians = []
+    zip_players = []
+    
+    for players in cleaned_players:
+        
+        players['height'] = str(players['height'])
+        players['height'].split(' ')
+        players['height'] = int(players['height'][:2])
+    
+        if players['experience'] == 'YES':
+            players['experience'] = True
+        else:
+            players['experience'] = False
+            
+        guardians.append(players['guardians'])
+        zip_players.append(players['name'])
+        
+    players_guardians_pair.append(dict(zip(zip_players, guardians)))
+
+
+# def sorted_players():
+    # needs to take in players and sort them into the different teams
+# Don't know if it needs to be a function yet or not 
+
+balanced_teams = int(len(PLAYERS) / len(TEAMS))
+# take this number and add this amount to each team
+
+for player in cleaned_players:
+    if player['experience'] == True:
+        experienced_players.append(player)
+    else:
+        inexperienced_players.append(player)
+
+
+# if i can't get the balanced_teams number to work out, use below    
+# random.shuffle(cleaned_players)
+# panthers = copied_players[::3]
+# bandits = copied_players[1::3]
+# warriors = copied_players[2::3]
+    
+        
 
 if __name__ == "__main__":
+
 # HINT: Unit 1 project files/workspace had an example of this.
 
 # This does not mean everything you write has to be contained within Dunder Main. 
@@ -32,22 +90,25 @@ if __name__ == "__main__":
         if team_choice == '1':
             print(' - PANTHERS - ')
             print('--------------')
+            print(f'Amount in team: {balanced_teams}')
             print('Players:')
             
             pass
         
         elif team_choice == '2':
-            print(' - BANDITS - ')
+	    print(' - BANDITS - ')
             print('--------------')
+            print(f'Amount in team: {balanced_teams}')
             print('Players:')
-            
+
             pass
         
         elif team_choice == '3':
-            print(' - WARRIORS - ')
+	    print(' - WARRIORS - ')
             print('--------------')
+            print(f'Amount in team: {balanced_teams}')
             print('Players:')
-            
+
             pass
         
         initial_choice = input('Would you like to learn about another team? [y]es or [n]o?  ')
@@ -55,4 +116,5 @@ if __name__ == "__main__":
         if initial_choice == 'B' or 'n':
             print('Thanks for joining me!')
             break
+
         

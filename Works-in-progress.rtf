@@ -5,52 +5,55 @@
 \margl1440\margr1440\vieww10800\viewh8400\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
-\f0\fs24 \cf0 #import constants.py\
+\f0\fs24 \cf0 import constants.py\
 import copy\
 import random\
+import sys\
 \
-cleaned_players = copy.deepcopy(constants.PLAYERS)\
-copied_teams = copy.deepcopy(constants.TEAMS)\
-\
-players_guardians_pair = []\
-experienced_players = []\
-inexperienced_players = []\
+cleaned_players = copy.deepcopy(PLAYERS)\
+copied_teams = copy.deepcopy(TEAMS)\
 \
 \
 def cleaned_data(cleaned_players):\
-    guardians = []\
-    zip_players = []\
-    \
     for players in cleaned_players:\
-        \
         players['height'] = str(players['height'])\
         players['height'] = players['height'].split(' ')\
-        players['height'] = int(players['height'][:2])\
+        players['height'] = int(players['height'][0])\
     \
         if players['experience'] == 'YES':\
             players['experience'] = True\
         else:\
             players['experience'] = False\
-        \
-        guardians.append(players['guardians'])\
-        zip_players.append(players['name'])\
-        \
-        if ' and ' in players['guardians']:\
-            players['guardians'] = players['guardians'].split('and')\
-        \
-    players_guardians_pair.append(dict(zip(zip_players, guardians)))\
 \
-    \
-def avg_height(*arg):\
+        \
+def avg_height(*args):\
     avg_sum = []\
-    for team in arg:\
+    for team in args:\
         for player in team:\
             avg_sum.append(player['height'])\
+            total_players = len(team)\
     \
-    return sum(avg_sum)/len(arg)\
+    return sum(avg_sum)/total_players\
+\
+\
+def parents(*args):\
+    the_guardians = []\
+    for team in args:\
+        for the_players in team:\
+            if (' and ') in the_players['guardians']:\
+                guard1, guard2 = the_players['guardians'].split(' and ')\
+                the_guardians.append(guard1)\
+                the_guardians.append(guard2)\
+            else:\
+                the_guardians.append(the_players['guardians'])\
+    return the_guardians\
+\
 \
 cleaned_data(cleaned_players)\
 random.shuffle(cleaned_players)\
+\
+experienced_players = []\
+inexperienced_players = []\
 \
 for player in cleaned_players:\
     if player['experience'] == True:\
@@ -66,82 +69,107 @@ warriors = (experienced_players[2::3]+inexperienced_players[2::3])\
 \
 \
 if __name__ == "__main__":\
-# HINT: Unit 1 project files/workspace had an example of this.\
-\
-# This does not mean everything you write has to be contained within Dunder Main. \
-# You can still import and define functions outside of dunder main, \
-# you can still extract pieces of logic into those functions. \
-# The main calls to your program should be protected inside Dunder Main, \
-# to prevent automatic execution if your script is imported.\
 \
     print('   Basketball Stats Tool')\
     print('\\n')\
-    print('     -----menu-----')\
+    print('------------menu------------')\
     print('\\n')\
     print('Your options are:')\
     print('   A) Display Team stats')\
     print('   B) Quit\\n')\
     \
-    initial_choice = input('Which would you like to do?  ').upper()\
+    \
+    initial_choice = input('Which would you like to do?  ')\
+    initial_choice = initial_choice.upper()\
+    \
+    if initial_choice == 'b' or 'B':\
+        print('Thank you for joining me!')\
+        sys.exit()\
+    \
+    while initial_choice != 'a' or 'A' or 'b' or 'B':\
+        if initial_choice == 'a' or 'A' or 'b' or 'B':\
+                break\
+        print('I need an "a/b" or an "A/B" please')\
     \
     print('\\n')\
     \
-    while initial_choice == 'A' or 'y':\
+    while initial_choice == 'a' or 'A' or 'y':\
+            \
         print('Alright, which team would you like to know more about?')\
-        print('  1) Panthers')\
-        print('  2) Bandits')\
-        print('  3) Warriors')\
+        print(f'  1) \{copied_teams[0]\}')\
+        print(f'  2) \{copied_teams[1]\}')\
+        print(f'  3) \{copied_teams[2]\}')\
         \
         team_choice = input('>  ')\
-        \
+        while team_choice != '1' or '2' or '3':\
+            if team_choice == '1' or '2' or '3':\
+                break\
+            print('Please pick a team')\
+                \
         if team_choice == '1':\
-            print(' - PANTHERS - ')\
-            print('--------------')\
+            print('\\n   - PANTHERS - ')\
+            print('__________________')\
             print(f'Amount in team: \{int(len(panthers))\}')\
             print(f'Total Experienced: \{int(len(panthers)/2)\}')\
             print(f'Total Inexperienced: \{int(len(panthers)/2)\}')\
             print(f'Average Height: \{avg_height(panthers)\}')\
-            print('Players:')\
+            print('\\nPlayers:')\
             for player in panthers:\
-                print(player['name'], end = ', ')\
+                players = [player['name']]\
+                print(', '.join(players))  \
+            print('\\n')  \
+            print('\\nGuardians:')\
+            panther_guardians = parents(panthers)\
+            print(', '.join(panther_guardians))\
             \
-            print('Guardians:')\
-            for guardian in panthers:\
-                print(player['guardian'], end = ', ')\
         \
         elif team_choice == '2':\
-            print(' - BANDITS - ')\
-            print('--------------')\
+            print('\\n   - BANDITS - ')\
+            print('__________________')\
             print(f'Amount in team: \{int(len(bandits))\}')\
             print(f'Total Experienced: \{int(len(bandits)/2)\}')\
             print(f'Total Inexperienced: \{int(len(bandits)/2)\}')\
             print(f'Average Height: \{avg_height(bandits)\}')\
-            print('Players:')\
+            print('\\nPlayers:')\
             for player in bandits:\
-                print(player['name'], end = ', ')\
-            \
-            print('Guardians:')\
-            for guardian in bandits:\
-                print(player['guardian'], end = ', ')\
+                players = [player['name']]\
+                print(', '.join(players))\
+            print('\\n')\
+            print('\\nGuardians:')\
+            bandits_guardians = parents(bandits)\
+            print(', '.join(bandits_guardians))\
         \
         elif team_choice == '3':\
-            print(' - WARRIORS - ')\
-            print('--------------')\
+            print('\\n   - WARRIORS - ')\
+            print('__________________')\
             print(f'Amount in team: \{int(len(warriors))\}')\
             print(f'Total Experienced: \{int(len(warriors)/2)\}')\
             print(f'Total Inexperienced: \{int(len(warriors)/2)\}')\
             print(f'Average Height: \{avg_height(warriors)\}')\
-            print('Players:')\
+            print('\\nPlayers:')\
             for player in warriors:\
-                print(player['name'], end = ', ')\
-            \
-            print('Guardians:')\
-            for guardian in warriors:\
-                print(player['guardian'], end = ', ')\
-\
-        initial_choice = input('Would you like to learn about another team? [y]es or [n]o?  ')\
+                players = [player['name']]\
+                print(', '.join(players))\
+            print('\\n')\
+            print('\\nGuardians:')\
+            warriors_guardians = parents(warriors)\
+            print(', '.join(warriors_guardians))\
         \
-        if initial_choice == 'B' or 'n':\
+        second_choice = input('\\nWould you like to learn about another team? [y]es or [n]o?  ')\
+        second_choice = second_choice.upper()\
+        \
+        if second_choice == 'Y':\
+            second_choice = initial_choice\
+            continue\
+        \
+        elif second_choice != 'Y' or 'N':\
+            while second_choice != 'Y' or 'N':\
+                if second_choice == 'Y' or 'N':\
+                    break\
+                second_choice = input("'y' or 'n'  ")\
+\
+        if second_choice == 'n' or 'N':\
             print('Thanks for joining me!')\
             break\
+        \
         }

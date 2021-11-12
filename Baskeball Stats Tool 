@@ -73,7 +73,6 @@ if __name__ == "__main__":
     while answering == True:
         
         if answering == False:
-            print('Thank you for joining me!')
             break
             
         initial_choice = input('Which would you like to do?  ')
@@ -88,12 +87,10 @@ if __name__ == "__main__":
             print('\nOk, maybe next time!')
             answering = False
             continue
-        
-        print('\n')
 
         while initial_choice == 'A' or 'y':
 
-            print('Alright, which team would you like to know more about?')
+            print('\nAlright, which team would you like to know more about?')
             print(f'  1) {copied_teams[0]}')
             print(f'  2) {copied_teams[1]}')
             print(f'  3) {copied_teams[2]}')
@@ -178,7 +175,6 @@ if __name__ == "__main__":
             
             if second_choice == 'y':
                 second_choice = initial_choice
-                print('\n')
                 continue
                 
 

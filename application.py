@@ -25,6 +25,14 @@ def avg_height(*args):
     return round((sum(avg_sum)/total_players),1)
 
 
+def display_players(*team):
+    team_players = []
+    for players in team:
+        for player in players:
+            team_players.append(player['name'])  
+    print(', '.join(team_players))  
+
+
 def parents(*args):
     the_guardians = []
     for team in args:
@@ -101,11 +109,7 @@ if __name__ == "__main__":
                 print(f'Average Height: {avg_height(panthers)}')
                 print('_____________________________________________')
                 print('\n  Players:')
-                panthers_players = []
-                for player in panthers:
-                    panthers_players.append(player['name'])
-                print(', '.join(panthers_players))  
-                
+                display_players(panthers)   
                 print('\n  Guardians:')
                 panthers_guardians = parents(panthers)
                 print(', '.join(panthers_guardians))
@@ -120,11 +124,7 @@ if __name__ == "__main__":
                 print(f'Average Height: {avg_height(bandits)}')
                 print('_____________________________________________')
                 print('\n  Players:')
-                bandits_players = []
-                for player in bandits:
-                    bandits_players.append(player['name'])
-                print(', '.join(bandits_players))         
-                
+                display_players(bandits)  
                 print('\n  Guardians:')
                 bandits_guardians = parents(bandits)
                 print(', '.join(bandits_guardians))
@@ -139,11 +139,7 @@ if __name__ == "__main__":
                 print(f'Average Height: {avg_height(warriors)}')
                 print('_____________________________________________')
                 print('\n  Players:')
-                warriors_players = []
-                for player in warriors:
-                    warriors_players.append(player['name'])
-                print(', '.join(warriors_players))
-                
+                display_players(warriors)
                 print('\n  Guardians:')
                 warriors_guardians = parents(warriors)
                 print(', '.join(warriors_guardians))

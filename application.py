@@ -1,4 +1,4 @@
-import constants.py
+import constants
 import copy
 import random
 

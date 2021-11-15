@@ -33,19 +33,6 @@ def display_players(*team):
     print(', '.join(team_players))  
 
 
-def parents(*args):
-    the_guardians = []
-    for team in args:
-        for the_players in team:
-            if (' and ') in the_players['guardians']:
-                guard1, guard2 = the_players['guardians'].split(' and ')
-                the_guardians.append(guard1)
-                the_guardians.append(guard2)
-            else:
-                the_guardians.append(the_players['guardians'])
-    return the_guardians
-
-
 cleaned_data(cleaned_players)
 random.shuffle(cleaned_players)
 
@@ -104,45 +91,42 @@ if __name__ == "__main__":
                 print('\n   - PANTHERS - ')
                 print('_____________________________________________')
                 print(f'\nAmount in team: {int(len(panthers))}')
-                print(f'Total Experienced: {int(len(panthers)/2)}')
-                print(f'Total Inexperienced: {int(len(panthers)/2)}')
+                print(f'Total Experienced: {int(len(panthers)/2)}',f'\nTotal Inexperienced: {int(len(panthers)/2)}')
                 print(f'Average Height: {avg_height(panthers)}')
                 print('_____________________________________________')
-                print('\n  Players:')
-                display_players(panthers)   
+                print('\n  Players:'),display_players(panthers)
                 print('\n  Guardians:')
-                panthers_guardians = parents(panthers)
-                print(', '.join(panthers_guardians))
+                for players in panthers:
+                    player = players['name']
+                    print(', '.join(players['guardians']), f'({player})')
                 print('_____________________________________________')
                 
             elif team_choice == '2':
                 print('\n   - BANDITS - ')
                 print('_____________________________________________')
                 print(f'\nAmount in team: {int(len(bandits))}')
-                print(f'Total Experienced: {int(len(bandits)/2)}')
-                print(f'Total Inexperienced: {int(len(bandits)/2)}')
+                print(f'Total Experienced: {int(len(bandits)/2)}',f'\nTotal Inexperienced: {int(len(bandits)/2)}')
                 print(f'Average Height: {avg_height(bandits)}')
                 print('_____________________________________________')
-                print('\n  Players:')
-                display_players(bandits)  
+                print('\n  Players:'),display_players(bandits)
                 print('\n  Guardians:')
-                bandits_guardians = parents(bandits)
-                print(', '.join(bandits_guardians))
+                for players in bandits:
+                    player = players['name']
+                    print(', '.join(players['guardians']), f'({player})')
                 print('_____________________________________________')
             
             elif team_choice == '3':
                 print('\n   - WARRIORS - ')
                 print('_____________________________________________')
                 print(f'\nAmount in team: {int(len(warriors))}')
-                print(f'Total Experienced: {int(len(warriors)/2)}')
-                print(f'Total Inexperienced: {int(len(warriors)/2)}')
+                print(f'Total Experienced: {int(len(warriors)/2)}',f'\nTotal Inexperienced: {int(len(warriors)/2)}')
                 print(f'Average Height: {avg_height(warriors)}')
                 print('_____________________________________________')
-                print('\n  Players:')
-                display_players(warriors)
+                print('\n  Players:'),display_players(warriors)
                 print('\n  Guardians:')
-                warriors_guardians = parents(warriors)
-                print(', '.join(warriors_guardians))
+                for players in warriors:
+                    player = players['name']
+                    print(', '.join(players['guardians']), f'({player})')
                 print('_____________________________________________')
             
             second_choice = input('\nWould you like to learn about another team? [y]es or [n]o? \n  > ')

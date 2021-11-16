@@ -49,7 +49,6 @@ panthers = (experienced_players[::3]+inexperienced_players[::3])
 bandits = (experienced_players[1::3]+inexperienced_players[1::3])
 warriors = (experienced_players[2::3]+inexperienced_players[2::3])
 
-
 if __name__ == "__main__":
     
     print('\n   Basketball Stats Tool')
@@ -144,3 +143,4 @@ if __name__ == "__main__":
                 print('\nThank you for joining me!')
                 answering = False
                 break
+

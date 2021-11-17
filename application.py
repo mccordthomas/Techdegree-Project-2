@@ -1,6 +1,5 @@
 import constants
 import copy
-import random
 
 cleaned_players = copy.deepcopy(constants.PLAYERS)
 copied_teams = copy.deepcopy(constants.TEAMS)
@@ -14,6 +13,7 @@ def cleaned_data(cleaned_players):
             players['experience'] = True
         else:
             players['experience'] = False
+        players['guardians'] = players['guardians'].split(' and ')
 
        
 def avg_height(*args):
@@ -34,8 +34,6 @@ def display_players(*team):
 
 
 cleaned_data(cleaned_players)
-random.shuffle(cleaned_players)
-
 experienced_players = []
 inexperienced_players = []
 
@@ -50,7 +48,6 @@ bandits = (experienced_players[1::3]+inexperienced_players[1::3])
 warriors = (experienced_players[2::3]+inexperienced_players[2::3])
 
 if __name__ == "__main__":
-    
     print('\n   Basketball Stats Tool')
     print('\n------------ menu ------------')
     print('\nYour options are:')
@@ -76,9 +73,7 @@ if __name__ == "__main__":
         
         while initial_choice == 'A' or 'y':
             print('\nAlright, which team would you like to know more about?')
-            print(f'  1) {copied_teams[0]}')
-            print(f'  2) {copied_teams[1]}')
-            print(f'  3) {copied_teams[2]}')
+            print(f'  1) {copied_teams[0]}',f'  2) {copied_teams[1]}',f'  3) {copied_teams[2]}')
             team_choice = input('\n  > ')
             valid_ans = ('1','2','3')
             while team_choice not in valid_ans:
@@ -143,4 +138,6 @@ if __name__ == "__main__":
                 print('\nThank you for joining me!')
                 answering = False
                 break
+
+
 

@@ -1,5 +1,6 @@
 import constants
 import copy
+import time
 
 cleaned_players = copy.deepcopy(constants.PLAYERS)
 copied_teams = copy.deepcopy(constants.TEAMS)
@@ -31,6 +32,21 @@ def display_players(*team):
         for player in players:
             team_players.append(player['name'])  
     print(', '.join(team_players))  
+
+
+def display_team(team):
+    print(f'\n   - {team} - ')
+    print('_____________________________________________')
+    print(f'\nAmount in team: {int(len(team))}')
+    print(f'Total Experienced: {int(len(team)/2)}',f'\nTotal Inexperienced: {int(len(team)/2)}')
+    print(f'Average Height: {avg_height(team)}')
+    print('_____________________________________________')
+    print('\n  Players:'),display_players(team)
+    print('\n  Guardians:')
+    for players in team:
+        player = players['name']
+        print(', '.join(players['guardians']), f'({player})')
+    print('_____________________________________________')
 
 
 cleaned_data(cleaned_players)
@@ -82,46 +98,13 @@ if __name__ == "__main__":
                 team_choice = input('\nPlease pick from the available teams \n  ~ ')
                 
             if team_choice == '1':
-                print('\n   - PANTHERS - ')
-                print('_____________________________________________')
-                print(f'\nAmount in team: {int(len(panthers))}')
-                print(f'Total Experienced: {int(len(panthers)/2)}',f'\nTotal Inexperienced: {int(len(panthers)/2)}')
-                print(f'Average Height: {avg_height(panthers)}')
-                print('_____________________________________________')
-                print('\n  Players:'),display_players(panthers)
-                print('\n  Guardians:')
-                for players in panthers:
-                    player = players['name']
-                    print(', '.join(players['guardians']), f'({player})')
-                print('_____________________________________________')
+                display_team(panthers)
                 
             elif team_choice == '2':
-                print('\n   - BANDITS - ')
-                print('_____________________________________________')
-                print(f'\nAmount in team: {int(len(bandits))}')
-                print(f'Total Experienced: {int(len(bandits)/2)}',f'\nTotal Inexperienced: {int(len(bandits)/2)}')
-                print(f'Average Height: {avg_height(bandits)}')
-                print('_____________________________________________')
-                print('\n  Players:'),display_players(bandits)
-                print('\n  Guardians:')
-                for players in bandits:
-                    player = players['name']
-                    print(', '.join(players['guardians']), f'({player})')
-                print('_____________________________________________')
+                display_team(bandits)
             
             elif team_choice == '3':
-                print('\n   - WARRIORS - ')
-                print('_____________________________________________')
-                print(f'\nAmount in team: {int(len(warriors))}')
-                print(f'Total Experienced: {int(len(warriors)/2)}',f'\nTotal Inexperienced: {int(len(warriors)/2)}')
-                print(f'Average Height: {avg_height(warriors)}')
-                print('_____________________________________________')
-                print('\n  Players:'),display_players(warriors)
-                print('\n  Guardians:')
-                for players in warriors:
-                    player = players['name']
-                    print(', '.join(players['guardians']), f'({player})')
-                print('_____________________________________________')
+                display_team(warriors)
             
             second_choice = input('\nWould you like to learn about another team? [y]es or [n]o? \n  > ')
             valid_second = ('y', 'n')
@@ -135,7 +118,8 @@ if __name__ == "__main__":
                 continue
                 
             elif second_choice == 'n':
-                print('\nThank you for joining me!')
+                print('\nThank you for joining me!\n')
+                time.sleep(1.5)
                 answering = False
                 break
 
